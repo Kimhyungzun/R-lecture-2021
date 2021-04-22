@@ -1,5 +1,6 @@
 # 데이터 프레임
-name <- c('철수','춘향','길동')
+name <- 
+  c('철수','춘향','길동')
 age <- c(22,20,25)
 gender <- factor(c('M','F','M'))
 blood.type <- factor(c('A','O','B'))
@@ -52,6 +53,26 @@ patients1 <- data.frame(name,age,gender)
 patients2 <- data.frame(name,blood.type)
 merge(patients1,patients2, by ='name')
 
+length(patients1)
+# 데이터프레임에 행 추가
+patients1[length(patients1$name)+1,]<-c('몽룡',19,'M')
+patients1
+patients2[length(patients2$name)+1,] <- c('영희','A')
+patients2
+
+#열 추가
+patients1['birth_year']<- c(1500, 1550, 1600, 1800)
+patients1
+
+# merge
+# Inner join
+merge(patients1, patients2)
+#left outer join
+merge(patients1, patients2, all.x = T)
+# Right outer join
+merge(patients1, patients2, all.y = T)
+# FULL outer join
+merge(patients1,patients2, all.x = T, all.y = T)
 
 
 
