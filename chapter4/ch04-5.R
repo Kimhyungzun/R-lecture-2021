@@ -49,15 +49,24 @@ patients_outrm <- patients[patients$gender %in% c('M','F') &
 patients_outrm      
       
 # 이상치를 NA로 대체
-patients$gender <- ifelse(patients$gender %in% c('M','F'),
-                          patients$gender, NA)
-patients      
-      
-      
-      
-      
-      
-      
+patients2 <- data.frame(name=c('환자1','환자2','환자3','환자4','환자5'),
+                       age=c(22,20,25,30,27),
+                       gender=factor(c('M','F','M','K','F')),
+                       blood.type=factor(c('A','O','B','AB','C')))
+patients2$gender <- ifelse(patients2$gender %in% c('M','F'),
+                           patients2$gender, NA)      
+patients2$blood.type <- ifelse(patients2$blood.type %in% c('A','B','O','AB'),
+                               patients2$blood.type, NA)      
+patients2      
+sum(is.na(patients2))      
+
+# 숫자의 이상치
+
+
+
+
+
+
       
 
 
