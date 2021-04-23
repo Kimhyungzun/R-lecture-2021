@@ -61,17 +61,19 @@ patients2
 sum(is.na(patients2))      
 
 # 숫자의 이상치
+boxplot(airquality[, c(1:4)])
+boxplot(airquality[,1])$stats
+boxplot(airquality$Ozone)$stats
 
+air <- airquality
+air$Ozone <- ifelse(air$Ozone<1 | air$Ozone>122,
+                    NA, air$Ozone)
+boxplot(airquality$Ozone)$stats[1]      
 
-
-
-
-
-      
-
-
-
-
+sum(is.na(air$Ozone))
+sum(is.na(airquality$Ozone))
+mean(air$Ozone, na.rm = T)
+mean(airquality$Ozone, na.rm = T)
 
 
 
