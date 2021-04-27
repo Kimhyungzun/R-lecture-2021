@@ -34,7 +34,7 @@ mpg4 %>%
 
 # 6
 mpg %>%
-      filter(manufacturer=='audi') %>%
+      filter(manufacturer=='9audi') %>%
       arrange(desc(hwy)) %>%
       head(5)
 
