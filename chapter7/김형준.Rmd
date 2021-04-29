@@ -1,0 +1,38 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+# Galton 선형회귀 보고서
+### 아버지의 키에 따른 아들의 키의 변화
+```{r}
+getwd()
+galton <- read.table("C:/workspace/r/data/Galton.txt",sep="\t",header = T)
+# Galton 데이터를 불러온다.
+head(galton)
+galton1 <- galton %>%
+      filter(Gender=='M') %>%
+      select(Father,Height) 
+
+galton1 <- galton %>%
+      filter(Gender=='M') %>%
+      mutate(father_height = 2.54 *galton1$Father,
+             boy_height = 2.54 * galton1$Height) 
+      
+lm <- lm(boy_height ~ father_height,data = galton1)
+coef(lm)
+# 아들키 = 0.448 * 아빠키 +97.178 [cm]
+
+ggplot(data=galton1,aes(x=father_height,y=boy_height)) +
+      geom_point(position= 'jitter', color = 'red') +
+      geom_abline(intercept = coef(lm)[1], slope = coef(lm)[2],
+                  color='blue',size=1)
+```
+
+이 그래프는 아빠의 키에 따른 아들의 키를 선형회귀로 그린 것이다.
+
+ 
+
+
+
