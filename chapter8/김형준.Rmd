@@ -1,0 +1,111 @@
+---
+title: "분류"
+author: "kim"
+date: '2021 5 3 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rpart)
+library(rpart.plot)
+library(caret)
+library(randomForest)
+library(e1071)
+library(class)
+```
+
+# ucla 데이터
+## 1. DT(decision tree)
+```{r}
+ucla <- read.csv('https://stats.idre.ucla.edu/stat/data/binary.csv')
+str(ucla)
+ucla$admit <- as.factor(ucla$admit)
+str(ucla)
+
+train_index <- createDataPartition(ucla$admit, p=0.8,list=F)
+ucla_train <- ucla[train_index,]
+ucla_test <- ucla[-train_index,]
+
+# 모델링/학습
+dtc <- rpart(admit ~ ., ucla_train)
+
+# 예측
+pred <- predict(dtc, ucla_test, type='class')
+table(pred)
+
+# 평가
+confusionMatrix(pred, ucla_test$admit) 
+
+# 시각화
+rpart.plot(dtc)
+```
+
+## 2. RF(Random Forest)
+```{r}
+train_index <- createDataPartition(ucla$admit, p=0.8,list=F)
+ucla_train <- ucla[train_index,]
+ucla_test <- ucla[-train_index,]
+
+# 모델링/학습
+rf <- randomForest(admit ~., ucla_train)
+
+# 예측
+pred <- predict(rf, ucla_test, type='class')
+
+# 평가
+confusionMatrix(pred, ucla_test$admit)
+
+# 시각화
+plot(rf)
+```
+
+## 3. SVM(Support vector Machine)
+```{r}
+train_index <- createDataPartition(ucla$admit, p=0.8,list=F)
+ucla_train <- ucla[train_index,]
+ucla_test <- ucla[-train_index,]
+
+# 모델링/학습
+svc <- svm(admit~., ucla_train)
+
+# 예측
+pred <- predict(svc, ucla_test, type='class')
+
+# 평가
+confusionMatrix(pred, ucla_test$admit)
+
+```
+
+## 4. K-NN(k-Nearest Neighbor)
+```{r}
+train_index <- createDataPartition(ucla$admit, p=0.8,list=F)
+ucla_train <- ucla[train_index,]
+ucla_test <- ucla[-train_index,]
+# 모델링
+k <- knn(ucla_train[,2:4],ucla_test[,2:4],
+         ucla_train$admit, k=5)
+confusionMatrix(k, ucla_test$admit)
+```
+
+# wine 데이터
+```{r}
+wine <- read.table('C:/workspace/r/data/wine.data.txt', sep=',')
+columns <- readLines('C:/workspace/r/data/wine.name.txt')
+names(wine)[2:14] <- columns
+names(wine)[2:14] <- substr(columns,4,nchar(columns))
+names(wine)[1] <- 'Y'
+
+```
+
+## 1. DT(decision tree)
+```{r}
+
+```
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 # 모델링을 위한 가공
 library(dplyr)
-
+setwd('C:/workspace/r')
 # Wine 데이터
 wine <- read.table('data/wine.data.txt', sep=',')
 head(wine)
