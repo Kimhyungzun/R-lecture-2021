@@ -11,7 +11,7 @@ keyword
 query <- paste0('target=title&query=', keyword)
 url <- paste(base_url, query, sep='?')
 url
-+
+
 auth_key <- paste('KakaoAK', kakao_api_key)
 auth_key
 res <- GET(url, add_headers('Authorization'=auth_key))
@@ -30,4 +30,9 @@ write.csv(as.matrix(df), 'OpenApi/book.csv', fileEncoding = 'utf-8',
 write.table(as.matrix(df), 'OpenApi/book.tsv', fileEncoding = 'utf-8',
           row.names = F, sep='\t')
 df2 <- read.csv('OpenApi/book.tsv', fileEncoding = 'utf-8',sep='\t')
+
+
+
+
+
 
