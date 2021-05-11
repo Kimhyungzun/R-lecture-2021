@@ -37,3 +37,4 @@ str(students)
 # 읽을 때 stringAsFactors=F 로 하면 문자열을 범주형으로 읽지 않음
 students <- read.csv('data/output.csv', fileEncoding = 'utf-8',
                      stringAsFactors=F )
+
