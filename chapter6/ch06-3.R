@@ -12,7 +12,7 @@ plot(cars, type='h', main='cars') # h-히스토그램과 같은 막대 그래프
 
 x <- gapminder %>%
       filteryear==1952 & continent=='Asia' %>%
-      mutate(gdp=gdpPercap] %>%
+      mutate(gdp=gdpPercap) %>%
       selcet(country, gdp) %>%
 arrange(desc(gd))  %>%
       head()
@@ -80,6 +80,7 @@ gapminder %>%
       geom_bar(stat='identity',aes(fill=continent))
 
 # Spectral 팔레트
+
 gapminder %>%
       filter(lifeExp>70) %>%
       group_by(continent) %>%
